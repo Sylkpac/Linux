@@ -6,7 +6,7 @@
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-# Linux Cheat Sheet for Cloud & Security: Directories, Commands & Best Practices <a name="linuxcheatsheet)"></a> 
+# Linux Cheat Sheet for Cloud & Security: Directories, Commands & Best Practices<a name="linuxcheatsheet)"></a> 
 
 ## Moving Around (Navigation Basics)
 
