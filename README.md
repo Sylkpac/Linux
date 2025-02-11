@@ -6,7 +6,7 @@
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-# Linux Cheat Sheet for Cloud & Security: Directories, Commands & Best Practices<a name="linuxcheatsheet)"></a> 
+# Linux Cheat Sheet for Cloud & Security: Directories, Commands & Best Practices<a name="linuxcheatsheet"></a> 
 
 ## Moving Around (Navigation Basics)
 
@@ -63,7 +63,7 @@ For **Security Engineers**, knowing the root directory structure is essential fo
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-# Understanding File Permissions in Linux (Bash)<a name="filelinux)"></a> 
+# Understanding File Permissions in Linux (Bash) <a name="filelinux"></a> 
 
 ## Breaking Down File Permissions
 When you list files in Linux using `ls -l`, you’ll see something like this:     
