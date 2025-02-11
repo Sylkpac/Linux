@@ -1,8 +1,10 @@
 # Table of Content:
 
 1.  [Linux Cheat Sheet for Cloud & Security: Directories, Commands & Best Practices](#linuxcheatsheet)
+2.  [Understanding File Permissions in Linux (Bash)](#filelinux)
+3.  
 
-----------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Linux Cheat Sheet for Cloud & Security: Directories, Commands & Best Practices <a name="linuxcheatsheet)"></a> 
 
@@ -56,4 +58,102 @@ For **Security Engineers**, knowing the root directory structure is essential fo
 |/tmp |  A storage area for temporary files, cleared on reboot. | Often targeted for malware and  privilege escalation. | 
 |/usr |  User binaries, libraries, and shared files (`/usr/bin`).|  If modified, attackers might replace binaries to create backdoors. Monitor for unauthorized file changes.| 
 | /var| Stores logs, mail, and cached files that change frequently. |  Security Engineers must monitor log files for anomalies, intrusion attempts, or log tampering. | 
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# Understanding File Permissions in Linux (Bash)<a name="filelinux)"></a> 
+
+## Breaking Down File Permissions
+When you list files in Linux using `ls -l`, you’ll see something like this:     
+`-rw-r--r--. 1 ec2-user ec2-user 16 Jan  8 18:09 class_notes.txt`
+
+## Let’s break it down (left to right):
+
+|Section| Example| Meaning |
+|------| -------| --------- | 
+| File Type| `-` |A dash (-) means it's a file. If it were a directory, it would be d.|
+|Owner Permissions | `rw-` | The owner (ec2-user) has read (r) and write (w) permissions but no execute (x) permission.|
+|Group Permissions| `r--` | The group (ec2-user) can only read (r) the file.| 
+| Other Permissions| `r--`| Everyone else can read (r) the file but not write (w) or execute (x).|
+| Links|`1`|Number of hard links to the file.|
+|Owner & Group| `ec2-user ec2-user`|The file is owned by user ec2-user and belongs to the group ec2-user.|
+| Size| `16` |File size in bytes.
+|Last Modified Date| `Jan 8 18:09` | Last time the file was modified.|
+|File Name| `class_notes.txt`| Name of the file.|
+
+
+## What About Directories?
+Directories have different permissions. Here's an example:
+
+`drwxr-xr-x. 2 ec2-user ec2-user 30 Jan  8 19:09 class_lessons`    
+
+`d`  It’s a directory.      
+`rwx`  The owner can read (r), write (w), and execute (x) (which means they can enter the directory).       
+`r-x` The group can read (r) and execute (x), but not write.    
+`r-x`  Others can read (r) and execute (x), but not write.
+
+## How to Change File Permissions (chmod)
+The `chmod` command is used to change permissions of files and directories.
+
+
+### Using Symbolic Mode (Letters)
+You can modify permissions using letters like `r`, `w`, and `x`.   
+
+**Common chmod Examples:**      
+`chmod u+x myscript.sh` Give the file owner execute permission  
+`chmod g-w myfile.txt` Remove write permission from the group       
+`chmod o+r myfile.txt` Allow others to read the file        
+`chmod u+rwx myfile.txt` Give the owner full permissions (read, write, execute)
+
+|Symbol| Meaning| 
+|------|--------|
+|`u`| User (owner)|
+|`g`|Group|
+|`o`| Others (everyone else)
+|`a`| All (user, group, others)
+|`+`| Add permission
+|`-`|Remove permission
+|`=`| Set exact permissions
+
+
+### Using Numeric Mode (Numbers)      
+Instead of `rwx`, you can use numbers:        
+
+|Number| Permission | Binary Representation |
+|-------|----------| -----------|
+|`0` | No permissions |`---` (000)
+|`1` |Execute only |`--x` (001)
+|`2`| Write only|`-w-` (010)
+|`3`| Write & Execute |`-wx` (011)
+|`4`| Read only |`r--` (100)
+|`5`| Read & Execute |`r-x` (101)
+|`6`| Read & Write |`rw-` (110)
+|`7`|Read, Write & Execute| `rwx` (111)
+
+### Common chmod Numeric Examples:
+
+`chmod 755 script.sh` Owner: `rwx`, Group: `r-x`, Others: `r-x`     
+`chmod 644 document.txt` Owner: `rw-`, Group: `r--`, Others: `r--`      
+`chmod 700 private_file` Owner: `rwx`, Group: `---`, Others: `---`      
+`chmod 777 public_file` Everyone can read, write, execute (not recommended for security)
+
+
+## Bash Cheat Sheet for File Permissions
+
+|Command| Description| 
+|-------|------------|
+|`ls -l`|List files with permissions
+|`chmod 755 <filename>`|Set rwxr-xr-x permissions using numbers
+|`chmod u+x <filename>`|Give owner execute permission
+|`chmod -R 700 <foldername>` | Recursively set permissions for a directory
+|`chown user:group <filename>`|Change file owner and group
+|`umask 022`|Default permission mask (affects new files)
+
+
+### Why File Permissions Matter for Security
+Prevents unauthorized access (e.g., sensitive files should not be readable by everyone).
+Protects against malware execution (e.g., restricting execute permissions can prevent unwanted scripts from running).
+Helps enforce least privilege (users only get access to what they need).
 
