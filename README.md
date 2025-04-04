@@ -14,7 +14,7 @@
 
 `pwd` Prints the current working directory (where you are).     
 `ls` Lists files and directories in the current location.   
-`cd <directory>` Change into a directory. Example: `cd home/user/Documents/`  
+`cd <directory>/` Change into a directory. Example: `cd home/user/Documents/`  
 `cd ..` Move one level up (back out of a directory).    
 `cd -` Switch to the previous directory you were in.    
 `cd ~` Move to the home directory of the current user.  
