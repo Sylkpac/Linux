@@ -2,7 +2,7 @@
 
 1.  [Linux Cheat Sheet for Cloud & Security: Directories, Commands & Best Practices](#linuxcheatsheet)
 2.  [Understanding File Permissions in Linux (Bash)](#filelinux)
-3.  
+3.  [tmux: A Powerful Multi-Pane Terminal](#tmux)
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -156,4 +156,67 @@ Instead of `rwx`, you can use numbers:
 Prevents unauthorized access (e.g., sensitive files should not be readable by everyone).
 Protects against malware execution (e.g., restricting execute permissions can prevent unwanted scripts from running).
 Helps enforce least privilege (users only get access to what they need).
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## tmux: A Powerful Multi-Pane Terminal <a name="tmux"></a> 
+
+**Description:** Tmux is a multi-pane terminal that allows you to manage multiple terminal sessions within a single window. It's a valuable tool for cybersecurity professionals due to its features such as detaching and reattaching sessions, creating multiple windows and panes, enhanced security, increased productivity, and collaboration capabilities.
+
+### Installation:
+
+* **Linux:** Use your package manager (e.g., sudo apt install tmux)
+
+* **macOS:** Use Homebrew (brew install tmux)
+  
+* **Windows:** Use Windows Linux Subsytem (WSL) 
+
+### Getting Started:
+
+* Launch tmux: 'tmux'
+* Navigate between panes and windows using arrow keys and 'Ctrl+b' combinations.
+* Create new windows and panes using 'Ctrl+b' followed by appropriate commands.
+* Commands found here: https://tmuxcheatsheet.com/
+
+### Key Features:
+
+* <b>Detach and reattach sessions</b>   
+  - Detach from a session: 'Ctrl+b' then 'd'     
+  - List sessions: 'tmux ls'     
+  - Reattach to a session: 'tmux attach-session -t 0' (assuming session 0 is listed).
+
+* **Create multiple windows and panes**
+  - Start a new tmux session: 'tmux'
+  - Create a new window for a different task: Press 'Ctrl + b' then 'c'
+  - In the new window, split the screen horizontally to run two commands simultaneously: Press 'Ctrl + b' then '%'
+  - Now split the first pane vertically to create even more workspace: Press 'Ctrl + b' then '"'
+  - Navigate between the panes and windows using:   
+      Next Window: 'Ctrl + b' then 'n'   
+      Previous Window: 'Ctrl + b' then 'p'   
+      Pane Navigation: 'Ctrl + b' then use arrow keys
+      
+* Enhanced security (session locking, password protection)
+  - To lock your tmux session, use the following key combination: 'Ctrl + b' then 'x'  
+*This will lock the session and prompt for a password to unlock it
+  - To unlock a locked session, simply press 'Enter' and you will be prompted to enter your password.
+  - To enhance security, set a lock command by executing: ' tmux set-option -g lock-command "gnome-screensaver-command -l" '
+  - Press 'Ctrl + b' then 'l' to lock the terminal. You will need to enter your password again to unlock.
+
+* Change layouts and shortcuts
+  
+  - Split the Pane Horizontally: Press 'Ctrl + b' then '%' to split the current pane horizontally.
+  - Split the Pane Vertically: Press 'Ctrl + b' then ' " ' to split the current pane vertically.
+  - Change the Layout: Press 'Ctrl + b' then 'space' to cycle through layouts until you find one you like.
+ 
+* Kill server/ kill everything
+  - From Outside the tmux Session: If you're not currently in a tmux session, you can run the following command in your terminal: 'tmux kill-server'
+    *This command kills all active tmux sessions and terminates tmux entirely.
+
+### Additional Resources:
+
+* Video Tutorial:      
+https://youtu.be/nTqu6w2wc68?si=R1VCBMUYTXQxhlp9   
+https://www.youtube.com/watch?v=DzNmUNvnB04&t   
+* Refer to the tmux manual for more detailed instructions:  
+https://github.com/tmux/tmux/wiki/
 
